@@ -1,0 +1,22 @@
+Problem Statement:
+
+- The RouteFinder should be able to store Objectville's complete network of subway lines, as well as all the stations along each line.
+    - Should take a starting and ending station and figure out a route to travel.
+    - Out travel agents should be able to print out the route, indicating which lines to take, which stations are passed on a line,
+      and when travelers may need to get off one line and get on another at connecting station.
+
+Additional notes:
+    - RouteFinder should be able to extend as we come up with new ways to provide our tourists the best experience around in object-based travel.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Arbitrary solution:
+Legend:
+    - boolean interchange: Local train station and Interchange stations can be handled with a boolean value.
+    - Type line: Enum to store line type(Booch, Gamma, Jacobson, Meyer, Rumbaugh, Wirfs-Brock)
+
+Feature List:
+    - We have to be able to represent a subway line and the stations along that line.
+    - We must be able to load multiple subway lines into the Program, including overlapping lines.
+    - We need to be able to figure out a valid path between any two stations on any lines.
+    - We need to be able to print out the route between two stations as a set of directions.

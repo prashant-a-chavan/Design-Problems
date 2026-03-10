@@ -1,0 +1,49 @@
+Problem: BGMI/PUBG Match System
+
+Phase 1: Basic Match Creation & Player Management
+Problem Statement: Design a system to manage BGMI matches where players can join lobbies and start games.
+
+Requirements - Phase 1:
+1. Player Management:
+    - Each player has: playerID, username, level (1-100)
+    - Track player statistics: total matches played, wins, kills
+
+2. Match Lobby:
+    - Support different game modes: SOLO, DUO, SQUAD
+    - Lobby capacity:
+        SOLO: 100 players
+        DUO: 50 teams (100 players)
+        SQUAD: 25 teams (100 players)
+    - Players can join/leave lobby before match starts
+
+3. Match States:
+    - WAITING (lobby is open, players joining)
+    - STARTING (countdown begun, no new players)
+    - IN_PROGRESS (match ongoing)
+    - FINISHED (match completed)
+
+4. Basic Operations:
+    - Create a new match lobby
+    - Add player to lobby
+    - Remove player from lobby
+    - Start match (when minimum players reached)
+    - End match and declare winner(s)
+
+5. Validation Rules:
+    - Minimum players to start:
+    - SOLO: 50 players
+    - DUO: 20 teams (40 players)
+    - SQUAD: 10 teams (40 players)
+    - Player cannot join multiple active matches
+    - Cannot add players after match starts
+    - Squad size must be exactly 4 players, Duo exactly 2
+
+
+
+
+
+Sample Scenarios:
+Create SQUAD match, 10 teams join, match starts
+Player tries to join when already in another match
+Try to start match with only 5 teams (should fail)
+Player leaves lobby before match starts
