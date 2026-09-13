@@ -1,13 +1,10 @@
 package practicedp.oop.chapter9.unit;
 
-import lombok.Data;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-@Data
 public class Unit {
     private String type;
     private int id;
@@ -43,5 +40,37 @@ public class Unit {
         } else {
             return value;
         }
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
+    }
+
+    public Map<String, Object> getProperties() {
+        return properties;
     }
 }

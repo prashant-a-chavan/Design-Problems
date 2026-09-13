@@ -1,11 +1,9 @@
 package practicedp.oop.chapter5;
 
-import lombok.Getter;
 import practicedp.oop.chapter5.enums.Builder;
 import practicedp.oop.chapter5.enums.Type;
 import practicedp.oop.chapter5.enums.Wood;
 
-@Getter
 public class GuitarSpec extends InstrumentSpec {
     private int numStrings;
 
@@ -18,7 +16,7 @@ public class GuitarSpec extends InstrumentSpec {
     @Override
     public boolean matches(InstrumentSpec otherSpec) {
         if (!super.matches(otherSpec))
-            return false; // TODO: Why are we not comparing numStrings ?
+            return false;
         if (!(otherSpec instanceof GuitarSpec))
             return false;
         GuitarSpec spec = (GuitarSpec) otherSpec;

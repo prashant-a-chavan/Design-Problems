@@ -1,20 +1,15 @@
 package practicedp.oop.chapter5b;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import practicedp.oop.chapter5b.enums.Builder;
-import practicedp.oop.chapter5b.enums.Type;
-import practicedp.oop.chapter5b.enums.Wood;
-
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-@Data
-@NoArgsConstructor
 public class InstrumentSpec {
     private Map<String, Object> properties;
+
+    public InstrumentSpec() {
+        this.properties = new HashMap<>();
+    }
 
     public InstrumentSpec(Map<String, Object> properties) {
         if (properties == null) {
@@ -35,5 +30,13 @@ public class InstrumentSpec {
             }
         }
         return true;
+    }
+
+    public Map<String, Object> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(Map<String, Object> properties) {
+        this.properties = properties == null ? new HashMap<>() : new HashMap<>(properties);
     }
 }

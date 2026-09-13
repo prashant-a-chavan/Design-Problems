@@ -1,8 +1,5 @@
 package practicedp.oop.chapter5;
 
-import lombok.Data;
-
-@Data
 public abstract class Instrument {
     private String serialNumber;
     private double price;
@@ -12,5 +9,17 @@ public abstract class Instrument {
         this.serialNumber = serialNumber;
         this.price = price;
         this.spec = spec;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public InstrumentSpec getSpec() {
+        return spec;
     }
 }

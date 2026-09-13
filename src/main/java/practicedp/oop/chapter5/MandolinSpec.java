@@ -1,12 +1,10 @@
 package practicedp.oop.chapter5;
 
-import lombok.Data;
 import practicedp.oop.chapter5.enums.Builder;
 import practicedp.oop.chapter5.enums.Style;
 import practicedp.oop.chapter5.enums.Type;
 import practicedp.oop.chapter5.enums.Wood;
 
-@Data
 public class MandolinSpec extends InstrumentSpec{
     private Style style;
 
@@ -27,5 +25,9 @@ public class MandolinSpec extends InstrumentSpec{
             return false;
 
         return true;
+    }
+
+    public Style getStyle() {
+        return style;
     }
 }

@@ -1,8 +1,5 @@
 package practicedp.oop.chapter10.subway;
 
-import lombok.Getter;
-
-@Getter
 public class Station {
     private String name;
 
@@ -24,5 +21,9 @@ public class Station {
     @Override
     public int hashCode() {
         return name.toLowerCase().hashCode();
+    }
+
+    public String getName() {
+        return name;
     }
 }

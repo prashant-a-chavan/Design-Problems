@@ -1,8 +1,5 @@
 package practicedp.designproblems.coffeemachine.better;
 
-import lombok.Data;
-
-@Data
 public class Inventory {
     private int coffeeQuantity;
     private int milkQuantity;

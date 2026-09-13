@@ -1,8 +1,5 @@
 package practicedp.designproblems.bgmi.lobby;
 
-import lombok.Getter;
-
-@Getter
 public enum LobbyMode {
     SOLO("Solo", 1, 50,100, new SoloValidation()),
     DUO("Duo", 2, 40, 50, new DuoValidation()),
@@ -24,5 +21,17 @@ public enum LobbyMode {
 
     public boolean validation() {
         return lobbyModeValidation.isValid(this);
+    }
+
+    public int getMinCapacity() {
+        return minCapacity;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public LobbyModeValidation getLobbyModeValidation() {
+        return lobbyModeValidation;
     }
 }

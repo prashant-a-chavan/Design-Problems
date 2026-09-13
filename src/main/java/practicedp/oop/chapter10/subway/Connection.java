@@ -1,14 +1,25 @@
 package practicedp.oop.chapter10.subway;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@Getter
-@AllArgsConstructor
 public class Connection {
     private Station station1;
     private Station station2;
     private String lineName;
 
-    // Getters and Constructor: Handled by annotations.
+    public Connection(Station station1, Station station2, String lineName) {
+        this.station1 = station1;
+        this.station2 = station2;
+        this.lineName = lineName;
+    }
+
+    public Station getStation1() {
+        return station1;
+    }
+
+    public Station getStation2() {
+        return station2;
+    }
+
+    public String getLineName() {
+        return lineName;
+    }
 }

@@ -5,13 +5,13 @@ This repository contains object-oriented design practice problems and implementa
 ## Tech Stack
 
 - Java 17
-- Gradle
-- JUnit 5
+- Plain Java for application code
+- Minimal Gradle setup for test execution only
 
 ## Project Structure
 
 - `src/main/java` - production code
-- `src/test/java` - unit tests
+- `src/test/java` - JUnit tests
 - `src/main/java/practicedp/designproblems/quantity` - quantity design problem implementation
 
 ## Solved Design Problems
@@ -41,15 +41,30 @@ Problem statement:
 
 - `src/main/java/practicedp/designproblems/quantity/ProblemStatement.md`
 
-## Build and Test
+## Compile and Run (Plain Java)
 
-Run from repository root:
+Compile all production sources:
 
 ```bash
-gradle clean test
+mkdir -p out
+javac -d out $(find src/main/java -name "*.java")
 ```
 
-Use local Gradle (wrapper directory is not included in this project layout).
+Run an entry point (example: quantity module):
+
+```bash
+java -cp out practicedp.designproblems.quantity.Main
+```
+
+## Run Tests (Minimal Gradle)
+
+Run tests only:
+
+```bash
+gradle test
+```
+
+This project does not use framework dependencies (for example, Spring/Lombok). Gradle is kept only to make JUnit test execution simple and repeatable.
 
 ## Run Demo Entry Point
 
@@ -57,4 +72,4 @@ The sample entry point for quantity usage is:
 
 - `src/main/java/practicedp/designproblems/quantity/Main.java`
 
-You can run it from your IDE, or via Gradle if an application task is configured in your setup.
+You can run it from your IDE, or directly via `java -cp out ...` after compilation.
