@@ -8,68 +8,56 @@ This repository contains object-oriented design practice problems and implementa
 - Plain Java for application code
 - Minimal Gradle setup for test execution only
 
-## Project Structure
+## Repository Structure
 
-- `src/main/java` - production code
-- `src/test/java` - JUnit tests
-- `src/main/java/practicedp/designproblems/quantity` - quantity design problem implementation
+- `src/main/java/practicedp/designproblems` - problem implementations
+- `src/main/java/practicedp/oop` - OOP learning exercises (chapters)
 
-## Solved Design Problems
+## Problem Modules
 
-Under `src/main/java/practicedp/designproblems`, the following problems are implemented:
+### 1) Quantity (`src/main/java/practicedp/designproblems/quantity`)
+- Type-safe quantity model with conversion and arithmetic (`plus`, `minus`, `multiplyBy`, `divideBy`)
+- Generic base abstraction via `core/Quantity` + `core/Unit`
+- Implemented dimensions:
+  - Length: `CENTIMETER`, `METER`, `KILOMETER`
+  - Mass: `GRAM`, `KILOGRAM`
+  - Color: `RgbColor` with blend operation
+- Entry point: `practicedp.designproblems.quantity.Main`
+- Problem statement: `src/main/java/practicedp/designproblems/quantity/ProblemStatement.md`
 
-- `biblioteca` - Library management system (book inventory, issue/return flows)
-- `quantity` - Quantity and unit conversion system with arithmetic and validation
-- `coffeemachine` - Coffee vending machine (recipes, ingredients, refill handling)
-- `bgmi` - BGMI match management (players, lobbies, match/game-mode flows)
-- `atm` - ATM workflow (authentication, balance, withdraw/deposit operations)
+### 2) Biblioteca (`src/main/java/practicedp/designproblems/biblioteca`)
+- Library inventory with list/checkout/return workflow
+- Uses action-based menu handlers (`actions/*`) implementing `MenuAction`
+- Entry point: `practicedp.designproblems.biblioteca.Main`
 
-Also present:
+### 3) Coffee Machine (`src/main/java/practicedp/designproblems/coffeemachine`)
+- Two implementations:
+  - `naive` - simple flow
+  - `better` - cleaner design with `CoffeeFactory`, `Recipe`, and `Inventory`
+- Entry points:
+  - `practicedp.designproblems.coffeemachine.naive.Main`
+  - `practicedp.designproblems.coffeemachine.better.Main`
 
-- `techprime` - scaffold/stub module
+### 4) BGMI (`src/main/java/practicedp/designproblems/bgmi`)
+- Player/lobby model for match setup
+- Supports lobby modes (`SOLO`, `DUO`, `SQUAD`) and mode validations
+- Entry point: `practicedp.designproblems.bgmi.Main`
 
-### Quantity Module Notes
+## OOP Practice Area
 
-The quantity module supports:
+- `src/main/java/practicedp/oop/chapter1` - initial guitar inventory design
+- `src/main/java/practicedp/oop/chapter5` and `chapter5b` - refactored instrument search design
+- `src/main/java/practicedp/oop/chapter9` - unit/property modeling
+- `src/main/java/practicedp/oop/chapter10` - subway/network examples
 
-- unit conversion
-- arithmetic on compatible quantities (`plus`, `minus`, `multiplyBy`, `divideBy`)
-- equality across units using base-unit normalization
-- input validation and null-safety
+## Tests
 
-Problem statement:
-
-- `src/main/java/practicedp/designproblems/quantity/ProblemStatement.md`
-
-## Compile and Run (Plain Java)
-
-Compile all production sources:
-
-```bash
-mkdir -p out
-javac -d out $(find src/main/java -name "*.java")
-```
-
-Run an entry point (example: quantity module):
-
-```bash
-java -cp out practicedp.designproblems.quantity.Main
-```
-
-## Run Tests (Minimal Gradle)
-
-Run tests only:
+- Test framework: JUnit 5
+- Scope: currently focused on the quantity module (`LengthQuantityTest`, `MassQuantityTest`, `RgbColorTest`)
+- Run tests:
 
 ```bash
 gradle test
 ```
 
 This project does not use framework dependencies (for example, Spring/Lombok). Gradle is kept only to make JUnit test execution simple and repeatable.
-
-## Run Demo Entry Point
-
-The sample entry point for quantity usage is:
-
-- `src/main/java/practicedp/designproblems/quantity/Main.java`
-
-You can run it from your IDE, or directly via `java -cp out ...` after compilation.
