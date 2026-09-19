@@ -1,4 +1,4 @@
-package practicedp.designproblems.tictactoe;
+package practicedp.designproblems.tictactoe.v1;
 
 import java.util.Scanner;
 
