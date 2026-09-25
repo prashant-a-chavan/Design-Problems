@@ -4,7 +4,12 @@ import practicedp.designproblems.snakeladder.v2.Board;
 import practicedp.designproblems.snakeladder.v2.BoardEntity;
 import practicedp.designproblems.snakeladder.v2.Dice;
 import practicedp.designproblems.snakeladder.v2.Player;
+import practicedp.designproblems.snakeladder.v2.rules.ExactLandingRule;
+import practicedp.designproblems.snakeladder.v2.rules.ExtraTurnRule;
+import practicedp.designproblems.snakeladder.v2.rules.MoveRule;
+import practicedp.designproblems.snakeladder.v2.rules.ThreeSixesRule;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -13,6 +18,7 @@ public class GameBuilder {
     private Board board;
     private Queue<Player> players;
     private Dice dice;
+    private List<MoveRule> rules;
 
     public GameBuilder board(int boardSize, List<BoardEntity> boardEntities) {
         this.board = Board.createBoard(boardSize, boardEntities);
@@ -29,6 +35,11 @@ public class GameBuilder {
 
     public GameBuilder dice(Dice dice) {
         this.dice = dice;
+        return this;
+    }
+
+    public GameBuilder rules(List<MoveRule> rules) {
+        this.rules = new ArrayList<>(rules);
         return this;
     }
 
@@ -49,6 +60,10 @@ public class GameBuilder {
         return dice;
     }
 
+    List<MoveRule> getRules() {
+        return rules;
+    }
+
     private void validateBuilder() {
         if (board == null) {
             throw new IllegalStateException("Board is required");
@@ -58,6 +73,15 @@ public class GameBuilder {
         }
         if (dice == null) {
             throw new IllegalStateException("Dice is required");
+        }
+
+        // Set default rules if not provided
+        if (rules == null) {
+            rules = List.of(
+                    new ThreeSixesRule(),
+                    new ExactLandingRule(),
+                    new ExtraTurnRule()
+            );
         }
     }
 }

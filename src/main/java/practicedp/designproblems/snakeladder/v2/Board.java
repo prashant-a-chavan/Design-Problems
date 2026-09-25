@@ -36,9 +36,12 @@ public final class Board {
             int start = boardEntity.getStart();
             int end = boardEntity.getEnd();
 
-            if (start < 1 || start > boardSize || end < 1 || end > boardSize) {
+            if (start < 1 || start > boardSize || end < 1 || end > boardSize)
                 throw new IllegalArgumentException("Entity positions must be within 1 and " + boardSize);
-            }
+
+            if (start == boardSize) throw new IllegalArgumentException("No entity may start on the final cell");
+
+            if (start == 1) throw new IllegalArgumentException("No entity may start on cell 1");
 
             if (entities.containsKey(start)) {
                 throw new IllegalArgumentException("Two entities cannot share the same start cell: " + start);

@@ -1,6 +1,6 @@
 package practicedp.designproblems.snakeladder.v2;
 
-public abstract class BoardEntity {
+public abstract sealed class BoardEntity permits Snake, Ladder {
     private final int start;
     private final int end;
 
@@ -9,11 +9,11 @@ public abstract class BoardEntity {
         this.end = end;
     }
 
-    protected int getStart() {
+    public int getStart() {
         return this.start;
     }
 
-    protected int getEnd() {
+    public int getEnd() {
         return this.end;
     }
 }
