@@ -1,4 +1,4 @@
-package practicedp.designproblems.snakeladder.v2;
+package practicedp.designproblems.snakeladder.v2.model;
 
 public final class Player {
     private final String name;
@@ -21,3 +21,4 @@ public final class Player {
         return name;
     }
 }
+

@@ -1,9 +1,9 @@
 package practicedp.designproblems.snakeladder.v2.game;
 
-import practicedp.designproblems.snakeladder.v2.Board;
-import practicedp.designproblems.snakeladder.v2.Dice;
-import practicedp.designproblems.snakeladder.v2.GameStatus;
-import practicedp.designproblems.snakeladder.v2.Player;
+import practicedp.designproblems.snakeladder.v2.model.Board;
+import practicedp.designproblems.snakeladder.v2.model.Dice;
+import practicedp.designproblems.snakeladder.v2.model.GameStatus;
+import practicedp.designproblems.snakeladder.v2.model.Player;
 import practicedp.designproblems.snakeladder.v2.rules.BounceBackRule;
 import practicedp.designproblems.snakeladder.v2.rules.MoveOutcome;
 import practicedp.designproblems.snakeladder.v2.rules.MoveRule;
@@ -17,6 +17,7 @@ public final class Game {
     private final Queue<Player> players;
     private final Dice dice;
     private final List<MoveRule> rules;
+    private final TurnOutcomeDispatcher outcomeDispatcher;
     private GameStatus gameStatus;
     private Player winner;
 
@@ -25,20 +26,12 @@ public final class Game {
         this.players = gameBuilder.getPlayers();
         this.dice = gameBuilder.getDice();
         this.rules = gameBuilder.getRules();
+        this.outcomeDispatcher = new TurnOutcomeDispatcher();
         this.gameStatus = GameStatus.NOT_STARTED;
     }
 
     public static GameBuilder getBuilder() {
         return new GameBuilder();
-    }
-
-    private static void handleForfeit(TurnContext turnContext) {
-        Player currentPlayer = turnContext.currentPlayer();
-        int turnStartPosition = turnContext.turnStartPosition();
-        String currentPlayerName = currentPlayer.getName();
-
-        currentPlayer.setCurrentPosition(turnStartPosition);
-        System.out.println(currentPlayerName + " rolled three 6s in a row. Turn forfeited, back to " + turnStartPosition);
     }
 
     public void play() {
@@ -63,7 +56,7 @@ public final class Game {
         takeTurn(currentPlayer, 0, currentPlayer.getCurrentPosition());
     }
 
-    private void takeTurn(Player currentPlayer, int consecutiveSixes, int turnStartPosition) {
+    void takeTurn(Player currentPlayer, int consecutiveSixes, int turnStartPosition) {
         String currentPlayerName = currentPlayer.getName();
         int currentPlayerPosition = currentPlayer.getCurrentPosition();
         int boardSize = board.getBoardSize();
@@ -74,33 +67,14 @@ public final class Game {
         TurnContext turnContext = new TurnContext(currentPlayer, currentPlayerPosition, roll, boardSize, consecutiveSixes, turnStartPosition, board);
 
         MoveOutcome moveOutcome = applyRules(turnContext);
-
-        if (moveOutcome == MoveOutcome.FORFEIT) {
-            handleForfeit(turnContext);
-            return;
-        }
-
-        if (moveOutcome == MoveOutcome.SKIP) {
-            handleSkippedMove(turnContext);
-            return;
-        }
-
         int nextPosition = resolveNextPosition(turnContext);
 
-        if (moveOutcome == MoveOutcome.WIN) {
-            handleWinningMove(turnContext);
-            return;
-        }
+        TurnHandlingContext handlingContext = new TurnHandlingContext(this, turnContext, nextPosition);
 
-        processMove(currentPlayer, nextPosition, currentPlayerName, currentPlayerPosition);
-
-        if (moveOutcome == MoveOutcome.REPLAY) {
-            System.out.println(currentPlayerName + " rolled a 6 and gets another turn!");
-            takeTurn(currentPlayer, consecutiveSixes + 1, turnStartPosition);
-        }
+        outcomeDispatcher.handle(moveOutcome, handlingContext);
     }
 
-    private void processMove(Player currentPlayer, int nextPosition, String currentPlayerName, int currentPlayerPosition) {
+    void processMove(Player currentPlayer, int nextPosition, String currentPlayerName, int currentPlayerPosition) {
         int finalPosition = board.getFinalPosition(nextPosition);
 
         if (finalPosition > nextPosition) {
@@ -112,6 +86,11 @@ public final class Game {
         }
 
         currentPlayer.setCurrentPosition(finalPosition);
+    }
+
+    void declareWinner(Player player) {
+        this.winner = player;
+        this.gameStatus = GameStatus.COMPLETE;
     }
 
     private MoveOutcome applyRules(TurnContext turnContext) {
@@ -134,28 +113,6 @@ public final class Game {
         }
 
         return nextPosition;
-    }
-
-    private void handleSkippedMove(TurnContext turnContext) {
-        int nextPosition = turnContext.nextPosition();
-        int boardSize = turnContext.boardSize();
-        String currentPlayerName = turnContext.currentPlayer().getName();
-
-        if (nextPosition > boardSize) {
-            System.out.println("Oops," + currentPlayerName + " is trying to move to " + nextPosition + " but, needs to land exactly on " + boardSize + ", Turn skipped.");
-        }
-    }
-
-    private void handleWinningMove(TurnContext turnContext) {
-        Player currentPlayer = turnContext.currentPlayer();
-        String currentPlayerName = currentPlayer.getName();
-        int currentPlayerPosition = currentPlayer.getCurrentPosition();
-        int nextPosition = turnContext.nextPosition();
-
-        processMove(currentPlayer, nextPosition, currentPlayerName, currentPlayerPosition);
-        this.winner = currentPlayer;
-        this.gameStatus = GameStatus.COMPLETE;
-        System.out.println("Hooray! " + currentPlayerName + " reached the final square and won!!!");
     }
 
     private boolean hasRule(Class<? extends MoveRule> ruleType) {

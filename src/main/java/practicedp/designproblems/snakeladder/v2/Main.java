@@ -1,6 +1,10 @@
 package practicedp.designproblems.snakeladder.v2;
 
+import practicedp.designproblems.snakeladder.v2.entities.BoardEntity;
+import practicedp.designproblems.snakeladder.v2.entities.Ladder;
+import practicedp.designproblems.snakeladder.v2.entities.Snake;
 import practicedp.designproblems.snakeladder.v2.game.Game;
+import practicedp.designproblems.snakeladder.v2.model.Dice;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,9 +1,9 @@
 package practicedp.designproblems.snakeladder.v2.game;
 
-import practicedp.designproblems.snakeladder.v2.Board;
-import practicedp.designproblems.snakeladder.v2.BoardEntity;
-import practicedp.designproblems.snakeladder.v2.Dice;
-import practicedp.designproblems.snakeladder.v2.Player;
+import practicedp.designproblems.snakeladder.v2.entities.BoardEntity;
+import practicedp.designproblems.snakeladder.v2.model.Board;
+import practicedp.designproblems.snakeladder.v2.model.Dice;
+import practicedp.designproblems.snakeladder.v2.model.Player;
 import practicedp.designproblems.snakeladder.v2.rules.ExactLandingRule;
 import practicedp.designproblems.snakeladder.v2.rules.ExtraTurnRule;
 import practicedp.designproblems.snakeladder.v2.rules.MoveRule;

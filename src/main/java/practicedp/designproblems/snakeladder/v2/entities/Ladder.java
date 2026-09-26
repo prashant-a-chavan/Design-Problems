@@ -1,4 +1,4 @@
-package practicedp.designproblems.snakeladder.v2;
+package practicedp.designproblems.snakeladder.v2.entities;
 
 public final class Ladder extends BoardEntity {
     private Ladder(int start, int end) {
@@ -13,3 +13,4 @@ public final class Ladder extends BoardEntity {
         return new Ladder(start, end);
     }
 }
+

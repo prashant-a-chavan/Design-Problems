@@ -1,4 +1,6 @@
-package practicedp.designproblems.snakeladder.v2;
+package practicedp.designproblems.snakeladder.v2.model;
+
+import practicedp.designproblems.snakeladder.v2.entities.BoardEntity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,3 +57,4 @@ public final class Board {
         if (boardSize <= 0) throw new IllegalArgumentException("Invalid Board Size");
     }
 }
+

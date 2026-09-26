@@ -1,4 +1,4 @@
-package practicedp.designproblems.snakeladder.v2;
+package practicedp.designproblems.snakeladder.v2.model;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,3 +23,4 @@ public final class Dice {
         return ThreadLocalRandom.current().nextInt(min, max+1);
     }
 }
+

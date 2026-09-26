@@ -1,4 +1,4 @@
-package practicedp.designproblems.snakeladder.v2;
+package practicedp.designproblems.snakeladder.v2.entities;
 
 public final class Snake extends BoardEntity {
     private Snake(int start, int end) {
@@ -13,3 +13,4 @@ public final class Snake extends BoardEntity {
         return new Snake(start, end);
     }
 }
+

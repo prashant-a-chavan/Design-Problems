@@ -1,4 +1,4 @@
-package practicedp.designproblems.snakeladder.v2;
+package practicedp.designproblems.snakeladder.v2.entities;
 
 public abstract sealed class BoardEntity permits Snake, Ladder {
     private final int start;
@@ -17,3 +17,4 @@ public abstract sealed class BoardEntity permits Snake, Ladder {
         return this.end;
     }
 }
+
