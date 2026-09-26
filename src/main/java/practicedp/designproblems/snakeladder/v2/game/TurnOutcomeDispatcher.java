@@ -24,6 +24,8 @@ public final class TurnOutcomeDispatcher {
         OutcomeHandler handler = handlers.get(outcome);
         if (handler != null) {
             handler.handle(context);
+        } else {
+            throw new IllegalArgumentException("No handler found for MoveOutcome: " + outcome);
         }
     }
 }
