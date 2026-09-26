@@ -9,12 +9,12 @@ public final class Player {
         this.currentPosition = 0;
     }
 
-    public void setCurrentPosition(int movePosition) {
-        this.currentPosition = movePosition;
-    }
-
     public int getCurrentPosition() {
         return currentPosition;
+    }
+
+    public void setCurrentPosition(int movePosition) {
+        this.currentPosition = movePosition;
     }
 
     public String getName() {

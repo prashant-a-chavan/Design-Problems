@@ -20,7 +20,7 @@ public final class Dice {
     }
 
     public int rollDice() {
-        return ThreadLocalRandom.current().nextInt(min, max+1);
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 }
 
