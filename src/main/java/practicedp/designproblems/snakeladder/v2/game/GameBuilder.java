@@ -20,6 +20,10 @@ public class GameBuilder {
     private Dice dice;
     private List<MoveRule> rules;
 
+    GameBuilder() {
+        // package-private to force creation through Game.getBuilder()
+    }
+
     public GameBuilder board(int boardSize, List<BoardEntity> boardEntities) {
         this.board = Board.createBoard(boardSize, boardEntities);
         return this;
